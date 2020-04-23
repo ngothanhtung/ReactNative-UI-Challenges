@@ -1,5 +1,12 @@
 import React from 'react';
-import {Text, StyleSheet, Dimensions, View} from 'react-native';
+import {
+  Text,
+  StyleSheet,
+  Dimensions,
+  View,
+  StatusBar,
+  SafeAreaView,
+} from 'react-native';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
@@ -8,6 +15,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {SvgXml} from 'react-native-svg';
 
 const W = Dimensions.get('window').width;
+const H = Dimensions.get('window').height;
 
 const ICON_SIZE = 26;
 
@@ -49,91 +57,97 @@ const Item = ({text, icon, color1, color2}) => (
 
 const index = () => {
   return (
-    <View style={styles.container}>
-      <HeaderBlock />
-      <View style={styles.headerTextContainer}>
-        <Text style={styles.headerText}>Classify transaction</Text>
-        <View height={12} />
-        <Text style={styles.subHeaderText}>
-          Classify this transaction into a
-        </Text>
-        <Text style={styles.subHeaderText}>particular category</Text>
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="light-content" />
+      <View style={styles.container}>
+        <HeaderBlock />
+        <View style={styles.headerTextContainer}>
+          <Text style={styles.headerText}>Classify transaction</Text>
+          <View height={12} />
+          <Text style={styles.subHeaderText}>
+            Classify this transaction into a
+          </Text>
+          <Text style={styles.subHeaderText}>particular category</Text>
+        </View>
+        {/* <View flex={1} style={{backgroundColor: 'red'}}></View> */}
+        <View style={styles.block}>
+          <View style={styles.row}>
+            <Item
+              color1="#81d4fa"
+              color2="#039be5"
+              text="General"
+              icon={
+                <AntDesignIcon
+                  name="appstore1"
+                  size={ICON_SIZE}
+                  style={styles.icon}
+                />
+              }
+            />
+            <Item
+              color1="#b39ddb"
+              color2="#651fff"
+              text="Transport"
+              icon={
+                <FontAwesome5Icon
+                  name="bus"
+                  size={ICON_SIZE}
+                  style={styles.icon}
+                />
+              }
+            />
+          </View>
+          <View style={styles.row}>
+            <Item
+              color1="#f48fb1"
+              color2="#ff4081"
+              text="Shopping"
+              icon={
+                <FontAwesome5Icon
+                  name="shopping-bag"
+                  size={ICON_SIZE}
+                  style={styles.icon}
+                />
+              }
+            />
+            <Item
+              color1="#ffcc80"
+              color2="#ff6d00"
+              text="Bills"
+              icon={
+                <FontAwesomeIcon
+                  name="file-text"
+                  size={ICON_SIZE}
+                  style={styles.icon}
+                />
+              }
+            />
+          </View>
+          <View style={styles.row}>
+            <Item
+              color1="#90caf9"
+              color2="#2962ff"
+              text="Entertainment"
+              icon={
+                <FontAwesomeIcon
+                  name="youtube-play"
+                  size={ICON_SIZE}
+                  style={styles.icon}
+                />
+              }
+            />
+            <Item
+              color1="#a5d6a7"
+              color2="#00c853"
+              text="Grocery"
+              icon={
+                <SvgIcon color="white" size={ICON_SIZE} data={groceryData} />
+              }
+            />
+          </View>
+        </View>
       </View>
-      <View style={styles.block}>
-        <View style={styles.row}>
-          <Item
-            color1="#81d4fa"
-            color2="#039be5"
-            text="General"
-            icon={
-              <AntDesignIcon
-                name="appstore1"
-                size={ICON_SIZE}
-                style={styles.icon}
-              />
-            }
-          />
-          <Item
-            color1="#b39ddb"
-            color2="#651fff"
-            text="Transport"
-            icon={
-              <FontAwesome5Icon
-                name="bus"
-                size={ICON_SIZE}
-                style={styles.icon}
-              />
-            }
-          />
-        </View>
-        <View style={styles.row}>
-          <Item
-            color1="#f48fb1"
-            color2="#ff4081"
-            text="Shopping"
-            icon={
-              <FontAwesome5Icon
-                name="shopping-bag"
-                size={ICON_SIZE}
-                style={styles.icon}
-              />
-            }
-          />
-          <Item
-            color1="#ffcc80"
-            color2="#ff6d00"
-            text="Bills"
-            icon={
-              <FontAwesomeIcon
-                name="file-text"
-                size={ICON_SIZE}
-                style={styles.icon}
-              />
-            }
-          />
-        </View>
-        <View style={styles.row}>
-          <Item
-            color1="#90caf9"
-            color2="#2962ff"
-            text="Entertainment"
-            icon={
-              <FontAwesomeIcon
-                name="youtube-play"
-                size={ICON_SIZE}
-                style={styles.icon}
-              />
-            }
-          />
-          <Item
-            color1="#a5d6a7"
-            color2="#00c853"
-            text="Grocery"
-            icon={<SvgIcon color="white" size={ICON_SIZE} data={groceryData} />}
-          />
-        </View>
-      </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -146,29 +160,28 @@ const styles = StyleSheet.create({
   },
 
   headerBlock: {
+    position: 'absolute',
     marginLeft: -85,
     marginTop: -240,
-    width: '90%',
-    height: 500,
+    width: W * 0.9,
+    height: H * 0.6,
     backgroundColor: '#ff4081',
     borderBottomLeftRadius: 60,
     borderBottomRightRadius: 60,
     transform: [{rotateX: '0deg'}, {rotateZ: '-40deg'}],
   },
 
-  headerTextContainer: {position: 'absolute', top: 40, paddingHorizontal: 30},
+  headerTextContainer: {position: 'absolute', top: 54, paddingHorizontal: 30},
   headerText: {color: 'white', fontSize: 24, fontWeight: '700'},
   subHeaderText: {color: 'white', fontSize: 16, fontWeight: '400'},
 
   block: {
-    flex: 1,
+    flex: 2,
     justifyContent: 'flex-end',
-    paddingBottom: 24,
-    backgroundColor: '#1B1B2E',
   },
 
   row: {
-    marginTop: 24,
+    marginBottom: 24,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
   },
